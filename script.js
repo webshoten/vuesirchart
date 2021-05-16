@@ -4,40 +4,41 @@ new Vue({
     data: {
         labels:[1,2,3,4,5,6],
         Susceptible:{
-            title:'Susceptible',
-            data: [100, -50, 200, 150, 200, 400]
+            title:'感受性保持者(Susceptible)',
+            data: [0, 0, 0, 0, 0, 0]
         },
         Infected:{
-            title:'Infected',
-            data: [150, -20, 100, 130, 220, 420]
+            title:'感染者(Infected)',
+            data: [0, 0, 0, 0, 0, 0]
         },
         Recovered:{
-            title:'Recovered',
-            data: [110, -22, 60, 120, 220, 420]
+            title:'免疫保持者(Recovered)',
+            data: [0, 0, 0, 0, 0, 0]
         },                 
         firstInfected:10,
         contactPerDay:10,
+        recoverdate:14,
         NN:10000,
         s:10000-10,
-        i:1,
+        i:10,
         r:0,
-        beta:0.2/10000,
+        beta:0.02,
         gamma:0.07,
         dt:1,   
-        tmax:200, 
+        tmax:120, 
     },
     watch: {
         MathObject: {
             handler:function (newValue,oldValue) {
 
-                if(newValue[5] != oldValue[5] || newValue[4] != oldValue[4]){
-                    this.Infected.data.splice(0)
+                if(newValue[8] != oldValue[8] || newValue[7] != oldValue[7] || newValue[6] != oldValue[6] || newValue[5] != oldValue[5] || newValue[4] != oldValue[4]){
                     this.Susceptible.data.splice(0)
+                    this.Infected.data.splice(0)
                     this.Recovered.data.splice(0)
-                    this.randData()
+                    this.SIR()
                 }
-               this.canvas.data.datasets[0].data = this.Infected.data;
-               this.canvas.data.datasets[1].data = this.Susceptible.data;
+               this.canvas.data.datasets[0].data = this.Susceptible.data;
+               this.canvas.data.datasets[1].data = this.Infected.data;
                this.canvas.data.datasets[2].data = this.Recovered.data;
                this.canvas.data.labels = this.labels
                this.canvas.update();
@@ -47,10 +48,11 @@ new Vue({
     },
     computed: {
         MathObject() {
-        return [this.labels,this.Susceptible,this.Infected,this.Recovered,this.beta,this.gamma];
+        return [this.labels,this.Susceptible,this.Infected,this.Recovered,this.beta,this.gamma,this.firstInfected,this.contactPerDay,this.recoverdate];
         }
        },
     mounted() {
+        this.SIR();
         this.chart();
     },
     methods: {
@@ -58,14 +60,14 @@ new Vue({
             var vm = this;
             var ctx = document.getElementById("charts");
             vm.canvas = new Chart(ctx, {
-                type: 'line',   //vm.graphSelected,
+                type: 'line',  
                 data: {
-                    labels: vm.labels, // Array(vm.datasets.length).fill(''),
+                    labels: vm.labels, 
                     datasets: [{
-                        label: vm.Susceptible.title, // 'グラフx',
+                        label: vm.Susceptible.title, 
                         fill: false,
                         borderColor: '#20B2AA',
-                        data: vm.Susceptible.data //vm.datasets
+                        data: vm.Susceptible.data 
                     },
                     {
                         label: vm.Infected.title, 
@@ -93,9 +95,12 @@ new Vue({
         f3(t,s,i,r,beta,gamma){
             return gamma*i;
         },
-        randData() {
+        SIR() {
 
-            beta = this.beta
+            beta = this.beta*this.contactPerDay/this.NN
+
+            this.gamma = 1.0/this.recoverdate
+            this.gamma = Math.round(this.gamma * 100) / 100
             gamma = this.gamma
 
             k1 = []
@@ -106,8 +111,8 @@ new Vue({
             Sarray = []
             Iarray = []
             Rarray = []
-            this.s = 10000-20
-            this.i = 1
+            this.s = 10000-this.firstInfected
+            this.i = this.firstInfected
             this.r = 0
             for(this.t=0;this.t<this.tmax;this.t+=this.dt) {
                  k1.push(this.dt*this.f1(this.t,this.s,this.i,this.r,beta,gamma))

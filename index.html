@@ -18,64 +18,34 @@
     <div id="app">
 
         <div class="jumbotron">
-            <h1>Chart.jsを使ってグラフを描画してみよう</h1>
+            <h1>SIRモデルのシミュレーション</h1>
             <p class="lead">
-                Chart.js（とVue.js）を使ってグラフを描画するサンプルサイトです。
+
+                <p>4次のルンゲクッタ法を用いたSIRモデルのシミュレーション</p>
+                
+                <ol>
+                    <li>人口を1万人とする</li>
+                    <li>SIRモデルにおける感染率$\beta = \frac{(接触者数) \times (感染率)}{人口}$ とする　※$接触者数、感染率$は、それぞれ1日1人あたり</li>
+                    <li>SIRモデルにおける回復率$\gamma = \frac{1}{(回復までの日数)}$ とする</li>
+                </ol>
+
             </p>
         </div>
 
+
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 col-md-4">
 
-                    <h2>使用するデータ</h2>
-                    <div class="col-4">
-                        <input type="number" class="form-control" v-model.number="gamma">
-                    </div>
-                    <div class="col">
-                        <input type="range" class="form-control" min="0.01" max="0.30" step="0.01" v-model.number="gamma">
-                    </div>
-                    <div class="col-5">
-                        <input type="number" class="form-control" v-model.number="beta">
-                    </div>
-                    <div class="col">
-                        <input type="range" class="form-control" min="0.000001" max="0.00005" step="0.000001" v-model.number="beta">
-                    </div>
-                    <!-- <div v-for="(item,index) in datasets" :key="index" class="row py-2">
-                        <div class="col-3">
-                            <input type="number" class="form-control" v-model.number="datasets[index]">
-                        </div>
-                        <div class="col">
-                            <input type="range" class="form-control" min="-500" max="500"
-                                v-model.number="datasets[index]">
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-primary" v-on:click="add(index)">足す</button>
-                            <button class="btn btn-secondary" v-on:click="del(index)"
-                                :disabled="datasets.length < 2">消す</button>
-                        </div>
-                    </div> -->
-
-
-                </div>
                 <div class="col-12 col-md-8">
 
-                    <!-- <div class="col-12 mb-5">
-                        <h2>グラフの種類</h2>
-                        <select class="form-control" v-model="graphSelected">
-                            <option v-for="(item,index) in graphs" :key="index" :value="item.type">
-                                {{ item.name }}</option>
-                        </select>
-
-                    </div> -->
                     <div class="col-12">
                         <div class="row">
                             <div class="col">
                                 <h2>グラフ</h2>
                             </div>
-                            <div class="col-auto">
-                                <button class="btn btn-info" v-on:click="randData()">ランダムに生成する</button>
-                            </div>
+                            <!-- <div class="col-auto">
+                                <button class="btn btn-info" v-on:click="SIR()">生成</button>
+                            </div> -->
                         </div>
                         <div>
                             <canvas id="charts"></canvas>
@@ -84,15 +54,71 @@
 
                     </div>
                 </div>
+
+
+                <div class="col-12 col-md-4">
+
+                    <h2>パラメータ</h2>
+                    <label for="firstInfected">初期感染者数:</label>
+                    <div class="col-4">
+                        <input type="number" id="firstInfected" class="form-control" v-model.number="firstInfected">
+                    </div>
+                    <div class="col">
+                        <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected">
+                    </div>
+                    <label for="contactPerDay">接触者数:</label>
+                    <div class="col-4">
+                        <input type="number" class="form-control" v-model.number="contactPerDay">
+                    </div>
+                    <div class="col">
+                        <input type="range" class="form-control" min="0" max="50"  v-model.number="contactPerDay">
+                    </div>
+                    <label for="recoverdate">回復までの日数:</label>
+                    <div class="col-4">
+                        <input type="number" class="form-control" v-model.number="recoverdate">
+                    </div>
+                    <div class="col">
+                        <input type="range" class="form-control" min="1" max="50"  v-model.number="recoverdate">
+                    </div>
+                    <label for="beta">感染率:</label>
+                    <div class="col-5">
+                        <input type="number" class="form-control" v-model.number="beta">
+                    </div>
+                    <div class="col">
+                        <input type="range" class="form-control" min="0.01" max="0.10" step="0.01" v-model.number="beta">
+                    </div>
+                    <!-- <label for="gamma">$\gamma$:</label>
+                    <div class="col-4">
+                        <input type="number" class="form-control" v-model.number="gamma">
+                    </div>
+                    <div class="col">
+                        <input type="range" class="form-control" min="0.01" max="0.30" step="0.01" v-model.number="gamma">
+                    </div>
+ -->
+
+                </div>
+
             </div>
 
-
-
         </div>
+
+
+        <footer> てｓｔ</footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        MathJax = {
+          chtml: {
+            matchFontHeight: false
+          },
+          tex: {
+            inlineMath: [['$', '$']]
+          }
+        };
+        </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     <script src="script.js"></script>
 </body>
 

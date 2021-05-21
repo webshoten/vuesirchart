@@ -1,4 +1,13 @@
 Vue.config.devtools = true;
+
+
+const router = new VueRouter({
+	routes : [
+        { path: '/', component: httpVueLoader('./components/main.vue') },
+        { path: '/about', component: httpVueLoader('./components/about.vue') },
+	]
+})
+
 new Vue({
     el: '#app',
     data: {
@@ -82,6 +91,37 @@ new Vue({
                         data: vm.Recovered.data 
                     }
                     ]
+                },
+                options: { 
+                    elements: { 
+                        point: { radius: 0 } 
+                    },
+                    scales: {                         
+                        xAxes: [                          
+                            {
+                                scaleLabel: {                
+                                    display: true,              
+                                    labelString: 'Days',   
+                                    fontColor: "black",           
+                                    fontSize: 16               
+                                },
+                            }
+                        ],
+                        yAxes: [                         
+                            {
+                                scaleLabel: {               
+                                    display: true,             
+                                    labelString: 'Population', 
+                                   // fontFamily: "sans-serif",
+                                    fontColor: "black",         
+                                   // fontFamily: "sans-serif",
+                                    fontSize: 16                
+                                },
+                            }
+                        ]
+                    }
+
+
                 }
             });
 
@@ -151,5 +191,6 @@ new Vue({
             this.Recovered.data = Rarray;
             this.labels = Tarray;
         }
-    }
+    },
+    router
 })

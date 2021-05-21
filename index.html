@@ -4,31 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chart.jsを使ってグラフを描画してみよう</title>
+    <title>SIRモデル</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@1.4.3/dist/vuetify.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
     <!--参考 https://github.com/globalgatej/chartjsSample -->
     <!-- http://epirecip.es/epicookbook/chapters/sir/js -->
     <!-- http://pc-physics.com/rk1.html -->
     <!-- https://wagtail.cds.tohoku.ac.jp/coda/python/p-6-application-sup-ode-sir-model.html -->
+    <!-- python -m http.server 8080 -->
+    <title>Snippet App</title>
 </head>
 
 <body>
 
     <div id="app">
 
+
+        <v-toolbar>
+            <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
+            <v-toolbar-title>FavoPhrase</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-toolbar-items class="hidden-sm-and-down">
+              <v-btn flat to="/">Home</v-btn>
+              <v-btn flat to="/about">About</v-btn>
+              <v-btn flat>Link Three</v-btn>
+            </v-toolbar-items>
+          </v-toolbar>
+          <v-content>
+            <router-view></router-view>
+        </v-content>
+
+
+
+
         <div class="jumbotron">
             <h1>SIRモデルのシミュレーション</h1>
             <p class="lead">
 
                 <p>4次のルンゲクッタ法を用いたSIRモデルのシミュレーション</p>
-                
-                <ol>
-                    <li>人口を1万人とする</li>
-                    <li>SIRモデルにおける感染率$\beta = \frac{(接触者数) \times (感染率)}{人口}$ とする　※$接触者数、感染率$は、それぞれ1日1人あたり</li>
-                    <li>SIRモデルにおける回復率$\gamma = \frac{1}{(回復までの日数)}$ とする</li>
-                </ol>
-
+            
             </p>
         </div>
 
@@ -71,7 +90,7 @@
                         <input type="number" class="form-control" v-model.number="contactPerDay">
                     </div>
                     <div class="col">
-                        <input type="range" class="form-control" min="0" max="50"  v-model.number="contactPerDay">
+                        <input type="range" class="form-control" min="0" max="100"  v-model.number="contactPerDay">
                     </div>
                     <label for="recoverdate">回復までの日数:</label>
                     <div class="col-4">
@@ -102,10 +121,21 @@
 
         </div>
 
+
+        <div class="jumbotron">
+            <ol>
+                <li>人口を1万人とする</li>
+                <li>SIRモデルにおける感染率$\beta = \frac{(接触者数) \times (感染率)}{人口}$ とする　※$接触者数、感染率$は、それぞれ1日1人あたり</li>
+                <li>SIRモデルにおける回復率$\gamma = \frac{1}{(回復までの日数)}$ とする</li>
+            </ol>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@1.4.3/dist/vuetify.min.js"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
     <script>
         MathJax = {
           chtml: {

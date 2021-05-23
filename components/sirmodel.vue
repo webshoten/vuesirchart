@@ -19,7 +19,10 @@
                                         </div>
                                     </div>
                                     <div>
+
+                                        <div class="chart-container">
                                         <canvas id="charts"></canvas>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -29,16 +32,6 @@
             
                                 <h2>Params</h2>
 
-                                <label for="firstInfected">初期感染者数:</label>
-                                <div class="row">
-                                    <div  class="col-12 col-md-3">
-                                        <input type="number" id="firstInfected" class="form-control" v-model.number="firstInfected">
-                                    </div>
-                                    <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected">
-                                    </div>
-                                </div>    
-
 
                                 <label for="contactPerDay">接触者数:</label>
                                 <div class="row">
@@ -47,6 +40,17 @@
                                     </div>
                                     <div  class="col-12 col-md-9">
                                         <input type="range" class="form-control" min="0" max="100"  v-model.number="contactPerDay">
+                                    </div>
+                                </div>    
+
+
+                                <label for="infection">感染率:</label>
+                                <div class="row">
+                                    <div  class="col-12 col-md-3">
+                                        <input type="number" class="form-control" v-model.number="infection">
+                                    </div>
+                                    <div  class="col-12 col-md-9">
+                                        <input type="range" class="form-control" min="0.01" max="0.10" step="0.01" v-model.number="infection">
                                     </div>
                                 </div>    
 
@@ -60,16 +64,18 @@
                                     </div>
                                 </div>    
 
-                                <label for="infection">感染率:</label>
+
+                                <label for="firstInfected">初期感染者数:</label>
                                 <div class="row">
                                     <div  class="col-12 col-md-3">
-                                        <input type="number" class="form-control" v-model.number="infection">
+                                        <input type="number" id="firstInfected" class="form-control" v-model.number="firstInfected">
                                     </div>
                                     <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0.01" max="0.10" step="0.01" v-model.number="infection">
+                                        <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected">
                                     </div>
                                 </div>    
-            
+
+
                                 <div class="row">
                                     <div  class="col-12 col-md-3">
                                         $$\beta = $$ 
@@ -91,6 +97,17 @@
                                     </div>
                                 </div>   
 
+                                <div class="row">
+                                    <div  class="col-12 col-md-3">
+                                        $$R_0 = $$ 
+                                    </div>
+
+                                    <div  class="col-12 col-md-9 d-flex align-items-center">
+                                    {{  (10000 - this.firstInfected)*( this.infection*this.contactPerDay/this.NN )/(1.0/this.recoverdate)     }}
+                                    </div>
+                                </div> 
+
+
                             </div>
             
                         </div>
@@ -98,8 +115,9 @@
                         <div class="jumbotron">
                             <ol>
                                 <li>人口を1万人とする</li>
-                                <li>SIRモデルにおける感染率$$\beta = \frac{(接触者数) \times (感染率)}{人口}$$ とする　※接触者数、感染率は、それぞれ1日1人あたり</li>
-                                <li>SIRモデルにおける回復率$$\gamma = \frac{1}{(回復までの日数)}$$ とする</li>
+                                <li>SIRモデルにおける感染率 ※接触者数、感染率は、1日1人あたり$$\beta = \frac{(接触者数) \times (感染率)}{人口}$$ </li>
+                                <li>SIRモデルにおける回復率$$\gamma = \frac{1}{(回復までの日数)}$$ </li>
+                                <li>基本再生産数$$R_0 = \frac{S(0)\beta}{\gamma}$$ </li>
                             </ol>
                         </div>
         
@@ -123,7 +141,7 @@ module.exports = {
         Recovered:{
             title:'免疫保持者(Recovered)',
             data: [0, 0, 0, 0, 0, 0]
-        },                 
+        },         
         firstInfected:10,
         contactPerDay:10,
         recoverdate:14,
@@ -195,6 +213,7 @@ module.exports = {
                     ]
                 },
                 options: { 
+                    maintainAspectRatio: false,
                     elements: { 
                         point: { radius: 0 } 
                     },
@@ -251,9 +270,11 @@ module.exports = {
             Sarray = []
             Iarray = []
             Rarray = []
+
             this.s = 10000-this.firstInfected
             this.i = this.firstInfected
             this.r = 0
+            
             for(this.t=0;this.t<this.tmax;this.t+=this.dt) {
                  k1.push(this.dt*this.f1(this.t,this.s,this.i,this.r,beta,gamma))
                  k1.push(this.dt*this.f2(this.t,this.s,this.i,this.r,beta,gamma))
@@ -298,6 +319,22 @@ module.exports = {
 
 <style scoped>
 h1 {
-    color: blue;
+    color: black;
 }
+
+@media (min-width: 960px){
+.chart-container{
+    position: relative;
+    height:70vh
+}
+}
+
+@media (max-width: 960px){
+.chart-container{
+    position: relative;
+    height:50vh
+}
+}
+
+
 </style>

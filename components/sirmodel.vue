@@ -3,7 +3,7 @@
 
                     <div class="container-fluid">
 
-                    <div class="jumbotron">
+                    <div class="jumbotron p-2">
                         <h1>SIRモデルのシミュレーション</h1>
                             <p>4次のルンゲクッタ法を用いたSIRモデルのシミュレーション</p>
                     </div>
@@ -112,7 +112,7 @@
             
                         </div>
             
-                        <div class="jumbotron">
+                        <div class="jumbotron p-2">
                             <ol>
                                 <li>人口を1万人とする</li>
                                 <li>SIRモデルにおける感染率 ※接触者数、感染率は、1日1人あたり$$\beta = \frac{(接触者数) \times (感染率)}{人口}$$ </li>

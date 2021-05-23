@@ -121,6 +121,24 @@
                             </ol>
                         </div>
         
+                        <v-footer padless>
+                           <v-col
+                            cols="12"
+                            >
+                             <h6>[参考1]:基本的なモデル https://wagtail.cds.tohoku.ac.jp/coda/python/p-6-application-sup-ode-sir-model.html</h6>
+                             <h6>[参考2]:基本再生産数 https://www.naika.or.jp/jsim_wp/wp-content/uploads/2020/11/nichinaishi-109-11-article_4.pdf</h6>
+                             <h6>[参考3]:ルンゲクッタ法 http://pc-physics.com/rk1.html</h6>
+                             <h6>[参考4]:SIRモデル https://ja.wikipedia.org/wiki/SIR%E3%83%A2%E3%83%87%E3%83%AB </h6>
+                            </v-col>
+                            <v-col
+                            class="text-center"
+                            cols="12"
+                            >
+                            {{ new Date().getFullYear() }} — <strong>SDS hiro</strong>
+                            </v-col>
+                        </v-footer>
+
+
                     </div>         
 </template>
 <script>

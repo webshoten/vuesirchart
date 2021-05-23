@@ -34,7 +34,7 @@
             <v-navigation-drawer app v-model="drawer" clipped>
                 <v-container>
                     <v-list-item>
-                     // 略
+                     Author:hiro
                     </v-list-item>
                 
                     <v-divider></v-divider>
@@ -92,7 +92,36 @@
               <v-toolbar-title>Simple Data Simulations</v-toolbar-title>
               <v-spacer></v-spacer>
               <v-toolbar-items>
-                <v-btn text>Support</v-btn>
+
+                  <v-dialog
+                    transition="dialog-top-transition"
+                    max-width="600"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        v-bind="attrs"
+                        v-on="on"  text
+                      >Support</v-btn>
+                    </template>
+                    <template v-slot:default="dialog">
+                      <v-card>
+                        <v-toolbar
+                          color="primary"
+                          dark
+                        >工事中</v-toolbar>
+                        <v-card-text>
+                          <div class="text-h2 pa-12">工事中</div>
+                        </v-card-text>
+                        <v-card-actions class="justify-end">
+                          <v-btn
+                            text
+                            @click="dialog.value = false"
+                          >Close</v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </template>
+                  </v-dialog>
+
               </v-toolbar-items>
             </v-app-bar>
 

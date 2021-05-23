@@ -11,6 +11,9 @@ const router = new VueRouter({
 new Vue({
     el: '#app',
     data: {
+
+        drawer: null,
+
         labels:[1,2,3,4,5,6],
         Susceptible:{
             title:'感受性保持者(Susceptible)',
@@ -192,5 +195,6 @@ new Vue({
             this.labels = Tarray;
         }
     },
-    router
+    router: router,
+    vuetify: new Vuetify(),
 })

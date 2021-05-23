@@ -7,8 +7,13 @@
     <title>SIRモデル</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@1.4.3/dist/vuetify.min.css" rel="stylesheet">
+    <!-- <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@1.4.3/dist/vuetify.min.css" rel="stylesheet"> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -22,12 +27,16 @@
 
 <body>
 
+
+
     <div id="app">
 
-
+<!-- 
         <v-toolbar>
-            <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
+             <v-toolbar-side-icon></v-toolbar-side-icon>
             <v-toolbar-title>FavoPhrase</v-toolbar-title>
+          
+
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-sm-and-down">
               <v-btn flat to="/">Home</v-btn>
@@ -37,104 +46,131 @@
           </v-toolbar>
           <v-content>
             <router-view></router-view>
-        </v-content>
+          </v-content> -->
+          <v-app>
 
+            <v-navigation-drawer app v-model="drawer" clipped>Navigation Lists</v-navigation-drawer>
+            <v-app-bar color="primary" dark app clipped-left>
+              <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
+              <v-toolbar-title>Vuetify</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-items>
+                <v-btn text>For Enterprise</v-btn>
+                <v-btn text>Support</v-btn>
+              </v-toolbar-items>
+            </v-app-bar>
 
-
-
-        <div class="jumbotron">
-            <h1>SIRモデルのシミュレーション</h1>
-            <p class="lead">
-
-                <p>4次のルンゲクッタ法を用いたSIRモデルのシミュレーション</p>
+            <v-main>
+    
+    
+                <v-container fluid>
+                    <div class="jumbotron">
+                        <h1>SIRモデルのシミュレーション</h1>
+                        <p class="lead">
             
-            </p>
-        </div>
-
-
-        <div class="container-fluid">
-            <div class="row">
-
-                <div class="col-12 col-md-8">
-
-                    <div class="col-12">
+                            <p>4次のルンゲクッタ法を用いたSIRモデルのシミュレーション</p>
+                        
+                        </p>
+                    </div>
+            
+            
+                    <div class="container-fluid">
                         <div class="row">
-                            <div class="col">
-                                <h2>グラフ</h2>
+            
+                            <div class="col-12 col-md-8">
+            
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h2>グラフ</h2>
+                                        </div>
+                                        <!-- <div class="col-auto">
+                                            <button class="btn btn-info" v-on:click="SIR()">生成</button>
+                                        </div> -->
+                                    </div>
+                                    <div>
+                                        <canvas id="charts"></canvas>
+            
+                                    </div>
+            
+                                </div>
                             </div>
-                            <!-- <div class="col-auto">
-                                <button class="btn btn-info" v-on:click="SIR()">生成</button>
-                            </div> -->
+            
+            
+                            <div class="col-12 col-md-4">
+            
+                                <h2>パラメータ</h2>
+                                <label for="firstInfected">初期感染者数:</label>
+                                <div class="col-4">
+                                    <input type="number" id="firstInfected" class="form-control" v-model.number="firstInfected">
+                                </div>
+                                <div class="col">
+                                    <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected">
+                                </div>
+                                <label for="contactPerDay">接触者数:</label>
+                                <div class="col-4">
+                                    <input type="number" class="form-control" v-model.number="contactPerDay">
+                                </div>
+                                <div class="col">
+                                    <input type="range" class="form-control" min="0" max="100"  v-model.number="contactPerDay">
+                                </div>
+                                <label for="recoverdate">回復までの日数:</label>
+                                <div class="col-4">
+                                    <input type="number" class="form-control" v-model.number="recoverdate">
+                                </div>
+                                <div class="col">
+                                    <input type="range" class="form-control" min="1" max="50"  v-model.number="recoverdate">
+                                </div>
+                                <label for="beta">感染率:</label>
+                                <div class="col-5">
+                                    <input type="number" class="form-control" v-model.number="beta">
+                                </div>
+                                <div class="col">
+                                    <input type="range" class="form-control" min="0.01" max="0.10" step="0.01" v-model.number="beta">
+                                </div>
+                                <!-- <label for="gamma">$\gamma$:</label>
+                                <div class="col-4">
+                                    <input type="number" class="form-control" v-model.number="gamma">
+                                </div>
+                                <div class="col">
+                                    <input type="range" class="form-control" min="0.01" max="0.30" step="0.01" v-model.number="gamma">
+                                </div>
+             -->
+            
+                            </div>
+            
                         </div>
-                        <div>
-                            <canvas id="charts"></canvas>
+            
+                    </div>
+            
+            
+                    <div class="jumbotron">
+                        <ol>
+                            <li>人口を1万人とする</li>
+                            <li>SIRモデルにおける感染率$\beta = \frac{(接触者数) \times (感染率)}{人口}$ とする　※$接触者数、感染率$は、それぞれ1日1人あたり</li>
+                            <li>SIRモデルにおける回復率$\gamma = \frac{1}{(回復までの日数)}$ とする</li>
+                        </ol>
+                    </div>
+    
+                </v-container>
+    
+            </v-main>
+    
+            <!-- <v-footer color="primary" dark app>
+                Vuetify
+            </v-footer>
+     -->
+        </v-app>
 
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div class="col-12 col-md-4">
-
-                    <h2>パラメータ</h2>
-                    <label for="firstInfected">初期感染者数:</label>
-                    <div class="col-4">
-                        <input type="number" id="firstInfected" class="form-control" v-model.number="firstInfected">
-                    </div>
-                    <div class="col">
-                        <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected">
-                    </div>
-                    <label for="contactPerDay">接触者数:</label>
-                    <div class="col-4">
-                        <input type="number" class="form-control" v-model.number="contactPerDay">
-                    </div>
-                    <div class="col">
-                        <input type="range" class="form-control" min="0" max="100"  v-model.number="contactPerDay">
-                    </div>
-                    <label for="recoverdate">回復までの日数:</label>
-                    <div class="col-4">
-                        <input type="number" class="form-control" v-model.number="recoverdate">
-                    </div>
-                    <div class="col">
-                        <input type="range" class="form-control" min="1" max="50"  v-model.number="recoverdate">
-                    </div>
-                    <label for="beta">感染率:</label>
-                    <div class="col-5">
-                        <input type="number" class="form-control" v-model.number="beta">
-                    </div>
-                    <div class="col">
-                        <input type="range" class="form-control" min="0.01" max="0.10" step="0.01" v-model.number="beta">
-                    </div>
-                    <!-- <label for="gamma">$\gamma$:</label>
-                    <div class="col-4">
-                        <input type="number" class="form-control" v-model.number="gamma">
-                    </div>
-                    <div class="col">
-                        <input type="range" class="form-control" min="0.01" max="0.30" step="0.01" v-model.number="gamma">
-                    </div>
- -->
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="jumbotron">
-            <ol>
-                <li>人口を1万人とする</li>
-                <li>SIRモデルにおける感染率$\beta = \frac{(接触者数) \times (感染率)}{人口}$ とする　※$接触者数、感染率$は、それぞれ1日1人あたり</li>
-                <li>SIRモデルにおける回復率$\gamma = \frac{1}{(回復までの日数)}$ とする</li>
-            </ol>
-        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@1.4.3/dist/vuetify.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vuetify@1.4.3/dist/vuetify.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+
     <script src="https://unpkg.com/http-vue-loader"></script>
     <script>
         MathJax = {

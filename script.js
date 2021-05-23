@@ -15,18 +15,17 @@ new Vue({
         drawer: null,
         nav_lists:[
             {
-              name: 'Getting Started',
-              icon: 'mdi-speedometer',
-              lists:[ {item:'main',to:'/'}]
+              name: 'About',
+              icon: 'mdi-party-popper', //speedometer
+              active: true,
+              to:'/'
             },
             {
               name: 'Simulations',
-              icon: 'mdi-view-dashboard',
-              lists:[ {item:'SIR model',to:'/sirmodel'}]
-            },
-            {
-              name: 'Preminum themes',
-              icon: 'mdi-vuetify'
+              icon: 'mdi-chart-bell-curve',
+              active: true,
+              lists:[ {name:'SIR model',to:'/sirmodel'}],
+              to:''
             },
           ],
     },

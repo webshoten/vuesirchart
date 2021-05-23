@@ -27,36 +27,70 @@
             
                             <div class="col-12 col-md-4">
             
-                                <h2>params</h2>
+                                <h2>Params</h2>
+
                                 <label for="firstInfected">初期感染者数:</label>
-                                <div class="col-4">
-                                    <input type="number" id="firstInfected" class="form-control" v-model.number="firstInfected">
-                                </div>
-                                <div class="col">
-                                    <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected">
-                                </div>
+                                <div class="row">
+                                    <div  class="col-12 col-md-3">
+                                        <input type="number" id="firstInfected" class="form-control" v-model.number="firstInfected">
+                                    </div>
+                                    <div  class="col-12 col-md-9">
+                                        <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected">
+                                    </div>
+                                </div>    
+
+
                                 <label for="contactPerDay">接触者数:</label>
-                                <div class="col-4">
-                                    <input type="number" class="form-control" v-model.number="contactPerDay">
-                                </div>
-                                <div class="col">
-                                    <input type="range" class="form-control" min="0" max="100"  v-model.number="contactPerDay">
-                                </div>
+                                <div class="row">
+                                    <div  class="col-12 col-md-3">
+                                        <input type="number" class="form-control" v-model.number="contactPerDay">
+                                    </div>
+                                    <div  class="col-12 col-md-9">
+                                        <input type="range" class="form-control" min="0" max="100"  v-model.number="contactPerDay">
+                                    </div>
+                                </div>    
+
                                 <label for="recoverdate">回復までの日数:</label>
-                                <div class="col-4">
-                                    <input type="number" class="form-control" v-model.number="recoverdate">
-                                </div>
-                                <div class="col">
-                                    <input type="range" class="form-control" min="1" max="50"  v-model.number="recoverdate">
-                                </div>
-                                <label for="beta">感染率:</label>
-                                <div class="col-5">
-                                    <input type="number" class="form-control" v-model.number="beta">
-                                </div>
-                                <div class="col">
-                                    <input type="range" class="form-control" min="0.01" max="0.10" step="0.01" v-model.number="beta">
-                                </div>
+                                <div class="row">
+                                    <div  class="col-12 col-md-3">
+                                        <input type="number" class="form-control" v-model.number="recoverdate">
+                                    </div>
+                                    <div  class="col-12 col-md-9">
+                                        <input type="range" class="form-control" min="1" max="50"  v-model.number="recoverdate">
+                                    </div>
+                                </div>    
+
+                                <label for="infection">感染率:</label>
+                                <div class="row">
+                                    <div  class="col-12 col-md-3">
+                                        <input type="number" class="form-control" v-model.number="infection">
+                                    </div>
+                                    <div  class="col-12 col-md-9">
+                                        <input type="range" class="form-control" min="0.01" max="0.10" step="0.01" v-model.number="infection">
+                                    </div>
+                                </div>    
             
+                                <div class="row">
+                                    <div  class="col-12 col-md-3">
+                                        $$\beta = $$ 
+                                    </div>
+
+                                    <div  class="col-12 col-md-9 d-flex align-items-center">
+                                    {{Math.round((this.infection*this.contactPerDay/this.NN ) * 1000000 ) / 1000000 }}
+                                    </div>
+                                </div>    
+
+
+                                <div class="row">
+                                    <div  class="col-12 col-md-3">
+                                        $$\gamma = $$ 
+                                    </div>
+
+                                    <div  class="col-12 col-md-9 d-flex align-items-center">
+                                    {{Math.round((1.0/this.recoverdate) * 1000000) / 1000000}}
+                                    </div>
+                                </div>   
+
                             </div>
             
                         </div>
@@ -97,7 +131,7 @@ module.exports = {
         s:10000-10,
         i:10,
         r:0,
-        beta:0.02,
+        infection:0.02,
         gamma:0.07,
         dt:1,   
         tmax:120, 
@@ -124,19 +158,11 @@ module.exports = {
     },
     computed: {
         MathObject() {
-        return [this.labels,this.Susceptible,this.Infected,this.Recovered,this.beta,this.gamma,this.firstInfected,this.contactPerDay,this.recoverdate];
+        return [this.labels,this.Susceptible,this.Infected,this.Recovered,this.infection,this.gamma,this.firstInfected,this.contactPerDay,this.recoverdate];
         }
        },
     mounted() {
          MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        // MathJax = {
-        //   chtml: {
-        //     matchFontHeight: false
-        //   },
-        //   tex: {
-        //     inlineMath: [['$', '$']]
-        //   }
-        // };
         this.SIR();
         this.chart();
     },
@@ -211,10 +237,10 @@ module.exports = {
         },
         SIR() {
 
-            beta = this.beta*this.contactPerDay/this.NN
+            beta = this.infection*this.contactPerDay/this.NN
 
             this.gamma = 1.0/this.recoverdate
-            this.gamma = Math.round(this.gamma * 100) / 100
+            this.gamma = Math.round(this.gamma * 1000000) / 1000000
             gamma = this.gamma
 
             k1 = []

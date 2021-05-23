@@ -3,7 +3,7 @@ Vue.config.devtools = true;
 
 const router = new VueRouter({
 	routes : [
-        { path: '/about', component: httpVueLoader('./components/about.vue') },
+        { path: '/', component: httpVueLoader('./components/about.vue') },
         { path: '/sirmodel', component: httpVueLoader('./components/sirmodel.vue') }
 	]
 })
@@ -18,7 +18,7 @@ new Vue({
               name: 'About',
               icon: 'mdi-party-popper', //speedometer
               active: true,
-              to:'/about'
+              to:'/'
             },
             {
               name: 'Simulations',

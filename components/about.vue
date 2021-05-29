@@ -4,7 +4,7 @@
         <div class="col-sm-12">
           <h2>置き場</h2>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
 
           <v-card
             class="mx-auto"
@@ -36,14 +36,14 @@
 
               <v-btn
                 icon
-                @click="show = !show"
+                @click="show_sir = !show_sir"
               >
-                <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                <v-icon>{{ show_sir ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
               </v-btn>
             </v-card-actions>
 
             <v-expand-transition>
-              <div v-show="show">
+              <div v-show="show_sir">
                 <v-divider></v-divider>
 
                 <v-card-text>
@@ -56,11 +56,62 @@
             </v-expand-transition>
           </v-card>
 
+        </div>
+
+
+        <div class="col-sm-3">
+
+         <v-card
+            class="mx-auto"
+            max-width="344"
+          >
+            <v-img
+              src="../img/seirmodel.png"
+              height="200px"
+            ></v-img>
+
+            <v-card-title>
+              SEIRモデルのシミュレーション
+            </v-card-title>
+
+            <v-card-subtitle>
+              4次のルンゲクッタ法を用いたSEIRモデルのシミュレーション
+            </v-card-subtitle>
+
+            <v-card-actions>
+              <v-btn
+                color="orange lighten-2"
+                text
+                to="/seirmodel"
+              >
+                サイト内リンク
+              </v-btn>
+
+              <v-spacer></v-spacer>
+
+              <v-btn
+                icon
+                @click="show_seir = !show_seir"
+              >
+                <v-icon>{{ show_seir ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+              </v-btn>
+            </v-card-actions>
+
+            <v-expand-transition>
+              <div v-show="show_seir">
+                <v-divider></v-divider>
+
+                <v-card-text>
+                  SIRモデルの発展形としてのSEIRモデルの数値解析、潜伏期間の概念が追加される。
+                </v-card-text>
+              </div>
+            </v-expand-transition>
+          </v-card>
+
 
 
 
         </div>
-        <div class="col-sm-6"></div>
     </div>
 </div>
 </template>
@@ -70,7 +121,8 @@ module.exports = {
   data: function() {
     return {
       title: 'about.vue',
-      show: false,
+      show_sir: false,
+      show_seir: false,
     }
   }
 }

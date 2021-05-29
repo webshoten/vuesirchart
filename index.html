@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Data Simulations</title>
+    <title>Simple Data Numerical Calculations</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
@@ -88,7 +88,7 @@
             color="primary"   
             dark app clipped-left>
               <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
-              <v-toolbar-title>Simple Data Simulations</v-toolbar-title>
+              <v-toolbar-title>Simple Data Numerical Calculations</v-toolbar-title>
               <v-spacer></v-spacer>
               <v-toolbar-items>
 
@@ -140,7 +140,12 @@
     <script src="https://unpkg.com/http-vue-loader"></script>
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"></script>
     <script src="script.js"></script>
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        displayAlign: "left",
+        displayIndent: "2em"
+      });
+    </script>      
     <style lang="scss" scoped>
       #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;

@@ -56,7 +56,7 @@
                                         <input type="number" class="form-control" v-model.number="contactPerDay">
                                     </div>
                                     <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0" max="100"  v-model.number="contactPerDay">
+                                        <input type="range" class="form-control" min="0" max="50"  v-model.number="contactPerDay">
                                     </div>
                                 </div>    
 
@@ -67,7 +67,7 @@
                                         <input type="number" class="form-control" v-model.number="infection">
                                     </div>
                                     <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0.01" max="1.00" step="0.01" v-model.number="infection">
+                                        <input type="range" class="form-control" min="0.01" max="0.50" step="0.01" v-model.number="infection">
                                     </div>
                                 </div>    
 

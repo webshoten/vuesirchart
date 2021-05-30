@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
         <div class="col-sm-12">
-          <h2>置き場</h2>
+          <h2>作品</h2>
         </div>
         <div class="col-sm-3">
 
@@ -124,10 +124,9 @@ module.exports = {
       show_sir: false,
       show_seir: false,
     }
-  }
+  },
 }
 </script>
-
 <style scoped>
 h1 {
     color: red;

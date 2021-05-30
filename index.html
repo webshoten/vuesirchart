@@ -45,6 +45,7 @@
                           v-if="!nav_list.lists"
                           :to="nav_list.to"
                           :key="nav_list.name"
+                          @click="menu_close"
                         >
                           <v-list-item-icon>
                             <v-icon>{{ nav_list.icon }}</v-icon>
@@ -87,7 +88,7 @@
             <v-app-bar 
             color="primary"   
             dark app clipped-left>
-              <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
+              <v-app-bar-nav-icon @click="hamburger_open"></v-app-bar-nav-icon>
               <v-toolbar-title>Simple Data Numerical Calculations</v-toolbar-title>
               <v-spacer></v-spacer>
               <v-toolbar-items>
@@ -139,13 +140,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="https://unpkg.com/http-vue-loader"></script>
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"></script>
-    <script src="script.js"></script>
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        displayAlign: "left",
-        displayIndent: "2em"
-      });
-    </script>      
+    <script src="script.js"></script>    
     <style lang="scss" scoped>
       #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;

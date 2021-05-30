@@ -73,7 +73,7 @@
                                         <v-slider  class="form-control" min="0.01" max="0.10" step="0.01" 
                                         thumb-label="always"
                                         thumb-size="25"
-                                        v-model.number="infection"></v-slider>
+                                        v-model.number="infection">
                                     </div>
                                 </div>    
 
@@ -87,7 +87,7 @@
                                         <v-slider  class="form-control" min="1" max="50" 
                                         thumb-label="always"
                                         thumb-size="20"
-                                         v-model.number="recoverdate"></v-slider>
+                                         v-model.number="recoverdate">
                                     </div>
                                 </div>    
 
@@ -102,7 +102,7 @@
                                         <v-slider  class="form-control" min="0" max="20" 
                                         thumb-label="always"
                                         thumb-size="20"
-                                         v-model.number="firstInfected"></v-slider>
+                                         v-model.number="firstInfected">
                                     </div>
                                 </div>    
 

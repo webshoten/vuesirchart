@@ -52,55 +52,75 @@
 
                                 <label for="contactPerDay">接触者数(1人1日あたり):</label>
                                 <div class="row">
-                                    <div  class="col-12 col-md-3">
+                                    <!-- <div  class="col-12 col-md-3">
                                         <input type="number" class="form-control" v-model.number="contactPerDay">
-                                    </div>
-                                    <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0" max="50"  v-model.number="contactPerDay">
+                                    </div> -->
+                                    <div  class="col-12 col-md-12">
+                                        <!-- <input type="range" class="form-control" min="0" max="50"  v-model.number="contactPerDay"> -->
+                                        <v-slider class="form-control" max="50" min="0" 
+                                          thumb-label="always"
+                                          thumb-size="20"
+                                        v-model.number="contactPerDay">
                                     </div>
                                 </div>    
 
 
                                 <label for="infection">感染率(1人1日あたり):</label>
                                 <div class="row">
-                                    <div  class="col-12 col-md-3">
+                                    <!-- <div  class="col-12 col-md-3">
                                         <input type="number" class="form-control" v-model.number="infection">
-                                    </div>
-                                    <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0.01" max="0.50" step="0.01" v-model.number="infection">
+                                    </div> -->
+                                    <div  class="col-12 col-md-12">
+                                        <!-- <input type="range" class="form-control" min="0.01" max="0.50" step="0.01" v-model.number="infection"> -->
+                                        <v-slider  class="form-control" min="0.01" max="0.50" step="0.01" 
+                                        thumb-label="always"
+                                        thumb-size="25"
+                                        v-model.number="infection">
                                     </div>
                                 </div>    
 
 
                                 <label for="infection">潜伏期間:</label>
                                 <div class="row">
-                                    <div  class="col-12 col-md-3">
+                                    <!-- <div  class="col-12 col-md-3">
                                         <input type="number" class="form-control" v-model.number="incubationReriod">
-                                    </div>
-                                    <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0" max="20" v-model.number="incubationReriod">
+                                    </div> -->
+                                    <div  class="col-12 col-md-12">
+                                        <!-- <input type="range" class="form-control" min="0" max="20" v-model.number="incubationReriod"> -->
+                                        <v-slider class="form-control" max="20" min="0" 
+                                          thumb-label="always"
+                                          thumb-size="20"
+                                        v-model.number="incubationReriod">
                                     </div>
                                 </div>    
 
 
                                 <label for="recoverdate">回復までの日数:</label>
                                 <div class="row">
-                                    <div  class="col-12 col-md-3">
+                                    <!-- <div  class="col-12 col-md-3">
                                         <input type="number" class="form-control" v-model.number="recoverdate">
-                                    </div>
-                                    <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="1" max="50"  v-model.number="recoverdate">
+                                    </div> -->
+                                    <div  class="col-12 col-md-12">
+                                        <!-- <input type="range" class="form-control" min="1" max="50"  v-model.number="recoverdate"> -->
+                                        <v-slider  class="form-control" min="1" max="50" 
+                                        thumb-label="always"
+                                        thumb-size="20"
+                                         v-model.number="recoverdate">
                                     </div>
                                 </div>    
 
 
                                 <label for="firstInfected">初期感染者数:</label>
                                 <div class="row">
-                                    <div  class="col-12 col-md-3">
+                                    <!-- <div  class="col-12 col-md-3">
                                         <input type="number" id="firstInfected" class="form-control" v-model.number="firstInfected">
-                                    </div>
-                                    <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected">
+                                    </div> -->
+                                    <div  class="col-12 col-md-12">
+                                        <!-- <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected"> -->
+                                        <v-slider  class="form-control" min="0" max="20" 
+                                        thumb-label="always"
+                                        thumb-size="20"
+                                         v-model.number="firstInfected">
                                     </div>
                                 </div>    
 

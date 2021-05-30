@@ -54,7 +54,8 @@
                                         <input type="number" class="form-control" v-model.number="contactPerDay">
                                     </div>
                                     <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0" max="100"  v-model.number="contactPerDay">
+                                        <!-- <input type="range" class="form-control" min="0" max="100"  v-model.number="contactPerDay"> -->
+                                        <v-slider class="form-control" max="100" min="0" v-model.number="contactPerDay"></v-slider>
                                     </div>
                                 </div>    
 
@@ -65,7 +66,8 @@
                                         <input type="number" class="form-control" v-model.number="infection">
                                     </div>
                                     <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0.01" max="0.10" step="0.01" v-model.number="infection">
+                                        <!-- <input type="range" class="form-control" min="0.01" max="0.10" step="0.01" v-model.number="infection"> -->
+                                        <v-slider  class="form-control" min="0.01" max="0.10" step="0.01" v-model.number="infection"></v-slider>
                                     </div>
                                 </div>    
 
@@ -75,7 +77,8 @@
                                         <input type="number" class="form-control" v-model.number="recoverdate">
                                     </div>
                                     <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="1" max="50"  v-model.number="recoverdate">
+                                        <!-- <input type="range" class="form-control" min="1" max="50"  v-model.number="recoverdate"> -->
+                                        <v-slider  class="form-control" min="1" max="50"  v-model.number="recoverdate"></v-slider>
                                     </div>
                                 </div>    
 
@@ -86,7 +89,8 @@
                                         <input type="number" id="firstInfected" class="form-control" v-model.number="firstInfected">
                                     </div>
                                     <div  class="col-12 col-md-9">
-                                        <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected">
+                                        <!-- <input type="range" class="form-control" min="0" max="20"  v-model.number="firstInfected"> -->
+                                        <v-slider  class="form-control" min="0" max="20"  v-model.number="firstInfected"></v-slider>
                                     </div>
                                 </div>    
 

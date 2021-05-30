@@ -22,7 +22,7 @@ new Vue({
               to:'/'
             },
             {
-              name: 'Simulations',
+              name: 'Calmulations',
               icon: 'mdi-chart-bell-curve',
               active: true,
               lists:[ {name:'SIR model',to:'/sirmodel'},{name:'SEIR model',to:'/seirmodel'}],
